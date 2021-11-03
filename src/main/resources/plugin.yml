@@ -1,0 +1,12 @@
+name: LostWorld
+version: '${project.version}'
+main: yt.sehrschlecht.lostworld.LostWorld
+api-version: 1.17
+softdepend:
+  - ProtocolLib
+commands:
+  lostworld:
+    permission: lostworld.reload
+    description: Reloads the plugin
+    aliases:
+      - lw

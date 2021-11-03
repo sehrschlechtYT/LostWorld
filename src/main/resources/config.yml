@@ -1,0 +1,16 @@
+hide-players:
+  enabled: true #If this is enabled, all players can't see any other players.
+  show-near-players:
+    enabled: true #If this is enabled, all players can only see players that are in the defined distance.
+    distance: 100
+    hideNametags: true #If this is enabled, the nametags of all players will be hidden.
+chat:
+  disable-chat: true #If this is enabled, only players with the defined permission can write into the chat.
+  bypass-permission: "lostworld.chat.bypass" #Leave blank to disable the permission so nobody can write into the chat
+  disabled-message: "&cThe chat is disabled!" #Leave empty to disable this message
+server-list:
+  enabled: true #If this is enabled, the server list will be modified. This requires ProtocolLib to be installed! You have to restart the server after changing this option.
+  online-players: 0 #The displayed online player count
+  version-name:
+    enabled: false #If this is enabled, the online & max player counts will be replaced by a text
+    message: "&cPlayers are hidden"
