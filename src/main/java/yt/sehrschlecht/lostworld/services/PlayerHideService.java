@@ -17,6 +17,7 @@ public class PlayerHideService {
             Config config = Config.getInstance();
             if(!config.shouldShowNearPlayers()) return;
             for (Player player : Bukkit.getOnlinePlayers()) {
+                player.setPlayerListName(" ");
                 for (Player currentPlayer : Bukkit.getOnlinePlayers()) {
                     if(player.getWorld().equals(currentPlayer.getWorld()) && player.getLocation().distance(currentPlayer.getLocation()) < config.getNearPlayersDistance()) {
                         if (!player.canSee(currentPlayer)) {
