@@ -5,6 +5,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+import org.bukkit.event.player.PlayerCommandSendEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.scoreboard.Team;
 import yt.sehrschlecht.lostworld.LostWorld;
@@ -46,6 +48,24 @@ public class PlayerListeners implements Listener {
         event.setCancelled(true);
         if(!config.getChatDisabledMessage().isEmpty()) {
             player.sendMessage(config.getChatDisabledMessage().replace("&", "§"));
+        }
+    }
+
+    @EventHandler
+    public void onCommandPreprocess(PlayerCommandPreprocessEvent event) {
+        Config config = Config.getInstance();
+        if(!config.getCommandBypassPermission().isEmpty() && event.getPlayer().hasPermission(config.getCommandBypassPermission())) return;
+        if(Config.getInstance().shouldDisableCommandOutput()) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onCommandSend(PlayerCommandSendEvent event) {
+        Config config = Config.getInstance();
+        if(!config.getCommandBypassPermission().isEmpty() && event.getPlayer().hasPermission(config.getCommandBypassPermission())) return;
+        if(Config.getInstance().shouldDisableCommandOutput()) {
+            event.getCommands().clear();
         }
     }
 }

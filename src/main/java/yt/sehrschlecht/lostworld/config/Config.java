@@ -20,8 +20,11 @@ public class Config {
     private final boolean versionNameEnabled;
     private final String versionNameMessage;
 
+    private final boolean disableAllMessages;
+    private final boolean disableCommandOutput;
+    private final String commandBypassPermission;
 
-    public Config(boolean hidePlayersEnabled, boolean showNearPlayersEnabled, int showNearPlayersDistance, boolean hideNearPlayersNametags, boolean disableChat, String chatBypassPermission, String chatDisabledMessage, boolean serverListEnabled, int serverListOnlinePlayers, boolean versionNameEnabled, String versionNameMessage) {
+    public Config(boolean hidePlayersEnabled, boolean showNearPlayersEnabled, int showNearPlayersDistance, boolean hideNearPlayersNametags, boolean disableChat, String chatBypassPermission, String chatDisabledMessage, boolean serverListEnabled, int serverListOnlinePlayers, boolean versionNameEnabled, String versionNameMessage, boolean disableAllMessages, boolean disableCommandOutput, String commandBypassPermission) {
         this.hidePlayersEnabled = hidePlayersEnabled;
         this.showNearPlayersEnabled = showNearPlayersEnabled;
         this.showNearPlayersDistance = showNearPlayersDistance;
@@ -33,6 +36,9 @@ public class Config {
         this.serverListOnlinePlayers = serverListOnlinePlayers;
         this.versionNameEnabled = versionNameEnabled;
         this.versionNameMessage = versionNameMessage;
+        this.disableAllMessages = disableAllMessages;
+        this.disableCommandOutput = disableCommandOutput;
+        this.commandBypassPermission = commandBypassPermission;
         config = this;
     }
 
@@ -58,7 +64,11 @@ public class Config {
                 configuration.getBoolean("server-list.enabled"),
                 configuration.getInt("server-list.online-players"),
                 configuration.getBoolean("server-list.version-name.enabled"),
-                configuration.getString("server-list.version-name.message"));
+                configuration.getString("server-list.version-name.message"),
+
+                configuration.getBoolean("messages.disable-all"),
+                configuration.getBoolean("messages.disable-command-output"),
+                configuration.getString("messages.command-bypass-permission"));
     }
 
     public boolean shouldHidePlayers() {
@@ -103,5 +113,17 @@ public class Config {
 
     public String getVersionNameMessage() {
         return versionNameMessage;
+    }
+
+    public boolean shouldDisableAllMessages() {
+        return disableAllMessages;
+    }
+
+    public boolean shouldDisableCommandOutput() {
+        return disableCommandOutput;
+    }
+
+    public String getCommandBypassPermission() {
+        return commandBypassPermission;
     }
 }

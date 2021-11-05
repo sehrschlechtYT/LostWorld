@@ -14,3 +14,7 @@ server-list:
   version-name:
     enabled: false #If this is enabled, the online & max player counts will be replaced by a text
     message: "&cPlayers are hidden"
+messages: #Requires Protocollib
+  disable-all: true #Disables actionbar, title, subtitle and scoreboard messages
+  disable-command-output: true
+  command-bypass-permission: "lostworld.command.bypass" #Leave blank to disable. Players that don't have that permission won't be able to execute commands.

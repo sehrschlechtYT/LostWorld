@@ -1,12 +1,15 @@
 package yt.sehrschlecht.lostworld;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameRule;
+import org.bukkit.World;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.Team;
 import yt.sehrschlecht.lostworld.commands.LostWorldCommand;
 import yt.sehrschlecht.lostworld.config.Config;
 import yt.sehrschlecht.lostworld.listeners.PlayerListeners;
+import yt.sehrschlecht.lostworld.packetlisteners.MessageListeners;
 import yt.sehrschlecht.lostworld.packetlisteners.ServerListListeners;
 import yt.sehrschlecht.lostworld.services.PlayerHideService;
 import yt.sehrschlecht.lostworld.utils.Dependency;
@@ -40,6 +43,21 @@ public final class LostWorld extends JavaPlugin {
             } else {
                 getLogger().log(Level.SEVERE, "You have to install " + Dependency.PROTOCOLLIB.getName() + " to use the server list feature!");
             }
+        }
+
+        if(Config.getInstance().shouldDisableAllMessages()) {
+            if(Dependency.PROTOCOLLIB.isAvailable()) {
+                new MessageListeners(this).init();
+            } else {
+                getLogger().log(Level.SEVERE, "You have to install " + Dependency.PROTOCOLLIB.getName() + " to use the disable all messages feature!");
+            }
+        }
+
+        boolean disableCommandOutput = Config.getInstance().shouldDisableCommandOutput();
+        for (World world : Bukkit.getWorlds()) {
+            world.setGameRule(GameRule.COMMAND_BLOCK_OUTPUT, !disableCommandOutput);
+            world.setGameRule(GameRule.LOG_ADMIN_COMMANDS, !disableCommandOutput);
+            world.setGameRule(GameRule.SEND_COMMAND_FEEDBACK, !disableCommandOutput);
         }
     }
 
